@@ -1,16 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:shamo/models/product_model.dart';
+import 'package:shamo/models/product_model.dart';
 import 'package:shamo/pages/detail_chat_page.dart';
-// import 'package:shamo/providers/cart_provider.dart';
-// import 'package:shamo/providers/wishlist_provider.dart';
+import 'package:shamo/providers/cart_provider.dart';
+import 'package:shamo/providers/wishlist_provider.dart';
 import 'package:shamo/theme.dart';
 
 class ProductPage extends StatefulWidget {
-  // final ProductModel product;
-  // ProductPage(this.product);
-  ProductPage();
+  final ProductModel product;
+  ProductPage(this.product);
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -38,7 +37,7 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    // WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+    WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
     // CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     Future<void> showSuccessDialog() async {
@@ -157,36 +156,36 @@ class _ProductPageState extends State<ProductPage> {
               ],
             ),
           ),
-          // CarouselSlider(
-          //   items:
-          //       widget.product.galleries
-          //           .map(
-          //             (image) => Image.network(
-          //               image.url,
-          //               width: MediaQuery.of(context).size.width,
-          //               height: 310,
-          //               fit: BoxFit.cover,
-          //             ),
-          //           )
-          //           .toList(),
-          //   options: CarouselOptions(
-          //     initialPage: 0,
-          //     onPageChanged: (index, reason) {
-          //       setState(() {
-          //         currentIndex = index;
-          //       });
-          //     },
-          //   ),
-          // ),
+          CarouselSlider(
+            items:
+                widget.product.galleries!
+                    .map(
+                      (image) => Image.network(
+                        image.url!,
+                        width: MediaQuery.of(context).size.width,
+                        height: 310,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                    .toList(),
+            options: CarouselOptions(
+              initialPage: 0,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+            ),
+          ),
           SizedBox(height: 20),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children:
-          //       widget.product.galleries.map((e) {
-          //         index++;
-          //         return indicator(index);
-          //       }).toList(),
-          // ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:
+                widget.product.galleries!.map((e) {
+                  index++;
+                  return indicator(index);
+                }).toList(),
+          ),
         ],
       );
     }
@@ -217,16 +216,14 @@ class _ProductPageState extends State<ProductPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          ' name',
-                          // widget.product.name,
+                          widget.product.name!,
                           style: primaryTextStyle.copyWith(
                             fontSize: 18,
                             fontWeight: semiBold,
                           ),
                         ),
                         Text(
-                          'product.category.name',
-                          // widget.product.category.name,
+                          widget.product.category!.name!,
                           style: secondaryTextStyle.copyWith(fontSize: 12),
                         ),
                       ],
@@ -234,35 +231,34 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // wishlistProvider.setProduct(widget.product);
+                      wishlistProvider.setProduct(widget.product);
 
-                      // if (wishlistProvider.isWishlist(widget.product)) {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     SnackBar(
-                      //       backgroundColor: secondaryColor,
-                      //       content: Text(
-                      //         'Has been added to the Wishlist',
-                      //         textAlign: TextAlign.center,
-                      //       ),
-                      //     ),
-                      //   );
-                      // } else {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     SnackBar(
-                      //       backgroundColor: alertColor,
-                      //       content: Text(
-                      //         'Has been removed from the Wishlist',
-                      //         textAlign: TextAlign.center,
-                      //       ),
-                      //     ),
-                      //   );
-                      // }
+                      if (wishlistProvider.isWishlist(widget.product)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: secondaryColor,
+                            content: Text(
+                              'Has been added to the Wishlist',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: alertColor,
+                            content: Text(
+                              'Has been removed from the Wishlist',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      }
                     },
                     child: Image.asset(
-                      'assets/button_wishlist.png',
-                      // wishlistProvider.isWishlist(widget.product)
-                      //     ? 'assets/button_wishlist_blue.png'
-                      //     : 'assets/button_wishlist.png',
+                      wishlistProvider.isWishlist(widget.product)
+                          ? 'assets/button_wishlist_blue.png'
+                          : 'assets/button_wishlist.png',
                       width: 46,
                     ),
                   ),
@@ -288,8 +284,7 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   Text('Price starts from', style: primaryTextStyle),
                   Text(
-                    'price',
-                    // '\$${widget.product.price}',
+                    '\$${widget.product.price}',
                     style: priceTextStyle.copyWith(
                       fontSize: 16,
                       fontWeight: semiBold,
@@ -316,8 +311,7 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                   SizedBox(height: 12),
                   Text(
-                    'description',
-                    // widget.product.description,
+                    widget.product.description!,
                     style: subtitleTextStyle.copyWith(fontWeight: light),
                     textAlign: TextAlign.justify,
                   ),
@@ -391,7 +385,7 @@ class _ProductPageState extends State<ProductPage> {
                       child: TextButton(
                         onPressed: () {
                           // cartProvider.addCart(widget.product);
-                          // showSuccessDialog();
+                          showSuccessDialog();
                         },
                         style: TextButton.styleFrom(
                           shape: RoundedRectangleBorder(

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:shamo/models/user_model.dart';
-// import 'package:shamo/providers/auth_provider.dart';
+import 'package:shamo/models/user_model.dart';
+import 'package:shamo/providers/auth_provider.dart';
 
 import '../../theme.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    // UserModel user = authProvider.user;
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
 
     Widget header() {
       return AppBar(
@@ -21,28 +21,23 @@ class ProfilePage extends StatelessWidget {
             padding: EdgeInsets.all(defaultMargin),
             child: Row(
               children: [
-                // ClipOval(
-                //   child: Image.network(
-                //     user.profilePhotoUrl,
-                //     width: 64,
-                //   ),
-                // ),
+                ClipOval(
+                  child: Image.network(user.profilePhotoUrl!, width: 64),
+                ),
                 SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hallo, ',
-                        // 'Hallo, ${user.name}',
+                        'Hallo, ${user.name}',
                         style: primaryTextStyle.copyWith(
                           fontSize: 24,
                           fontWeight: semiBold,
                         ),
                       ),
                       Text(
-                        '@',
-                        // '@${user.username}',
+                        '@${user.username}',
                         style: subtitleTextStyle.copyWith(fontSize: 16),
                       ),
                     ],

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:shamo/models/user_model.dart';
-// import 'package:shamo/providers/auth_provider.dart';
-// import 'package:shamo/providers/product_provider.dart';
+import 'package:shamo/models/user_model.dart';
+import 'package:shamo/providers/auth_provider.dart';
+import 'package:shamo/providers/product_provider.dart';
 import 'package:shamo/theme.dart';
-// import 'package:shamo/widgets/product_card.dart';
-// import 'package:shamo/widgets/product_tile.dart';
+import 'package:shamo/widgets/product_card.dart';
+import 'package:shamo/widgets/product_tile.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    // UserModel user = authProvider.user;
-    // ProductProvider productProvider = Provider.of<ProductProvider>(context);
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+    ProductProvider productProvider = Provider.of<ProductProvider>(context);
 
     Widget header() {
       return Container(
@@ -28,31 +28,29 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, ',
-                    // 'Hallo, ${user.name}',
+                    'Hallo, ${user.name}',
                     style: primaryTextStyle.copyWith(
                       fontSize: 24,
                       fontWeight: semiBold,
                     ),
                   ),
                   Text(
-                    '@',
-                    // '@${user.username}',
+                    '@${user.username}',
                     style: subtitleTextStyle.copyWith(fontSize: 16),
                   ),
                 ],
               ),
             ),
-            // Container(
-            //   width: 54,
-            //   height: 54,
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     image: DecorationImage(
-            //       image: NetworkImage(user.profilePhotoUrl),
-            //     ),
-            //   ),
-            // ),
+            Container(
+              width: 54,
+              height: 54,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: NetworkImage('${user.profilePhotoUrl!}&size=54'),
+                ),
+              ),
+            ),
           ],
         ),
       );
@@ -173,12 +171,12 @@ class HomePage extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(width: defaultMargin),
-              // Row(
-              //   children:
-              //       productProvider.products
-              //           .map((product) => ProductCard(product))
-              //           .toList(),
-              // ),
+              Row(
+                children:
+                    productProvider.products
+                        .map((product) => ProductCard(product))
+                        .toList(),
+              ),
             ],
           ),
         ),
@@ -202,12 +200,12 @@ class HomePage extends StatelessWidget {
     Widget newArrivals() {
       return Container(
         margin: EdgeInsets.only(top: 14),
-        // child: Column(
-        //   children:
-        //       productProvider.products
-        //           .map((product) => ProductTile(product))
-        //           .toList(),
-        // ),
+        child: Column(
+          children:
+              productProvider.products
+                  .map((product) => ProductTile(product))
+                  .toList(),
+        ),
       );
     }
 

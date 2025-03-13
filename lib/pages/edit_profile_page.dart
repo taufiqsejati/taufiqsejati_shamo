@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:shamo/models/user_model.dart';
-// import 'package:shamo/providers/auth_provider.dart';
+import 'package:shamo/models/user_model.dart';
+import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
 class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    // UserModel user = authProvider.user;
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
 
-    Widget header() {
+    PreferredSizeWidget header() {
       return AppBar(
         leading: IconButton(
           icon: Icon(Icons.close),
@@ -41,7 +41,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                // hintText: user.name,
+                hintText: user.name,
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: subtitleColor),
@@ -63,7 +63,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                // hintText: '@${user.username}',
+                hintText: '@${user.username}',
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: subtitleColor),
@@ -88,7 +88,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                // hintText: user.email,
+                hintText: user.email,
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: subtitleColor),
@@ -112,13 +112,11 @@ class EditProfilePage extends StatelessWidget {
               height: 100,
               margin: EdgeInsets.only(top: defaultMargin),
               decoration: BoxDecoration(
-                // shape: BoxShape.circle,
-                // image: DecorationImage(
-                //   fit: BoxFit.fill,
-                //   image: NetworkImage(
-                //     user.profilePhotoUrl,
-                //   ),
-                // ),
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage(user.profilePhotoUrl!),
+                ),
               ),
             ),
             nameInput(),
@@ -131,7 +129,7 @@ class EditProfilePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: backgroundColor3,
-      // appBar: header(),
+      appBar: header(),
       body: content(),
       resizeToAvoidBottomInset: false,
     );
