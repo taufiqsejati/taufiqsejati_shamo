@@ -22,7 +22,10 @@ class ProfilePage extends StatelessWidget {
             child: Row(
               children: [
                 ClipOval(
-                  child: Image.network(user.profilePhotoUrl!, width: 64),
+                  child: Image.network(
+                    '${user.profilePhotoUrl!}&size=54',
+                    width: 64,
+                  ),
                 ),
                 SizedBox(width: 16),
                 Expanded(

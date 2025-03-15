@@ -24,23 +24,75 @@ class ProductTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // ClipRRect(
-            //   borderRadius: BorderRadius.circular(20),
-            //   child: Image.network(
-            //     product.galleries![0].url!,
-            //     width: 120,
-            //     height: 120,
-            //     fit: BoxFit.cover,
-            //   ),
-            // ),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                'assets/image_shoes.png',
-                width: 120,
-                height: 120,
-                fit: BoxFit.cover,
-              ),
+              child:
+                  product.galleries!.isNotEmpty
+                      ? Image.network(
+                        product.galleries![0].url!,
+                        width: 120,
+                        height: 120,
+                        loadingBuilder: (
+                          BuildContext context,
+                          Widget child,
+                          ImageChunkEvent? loadingProgress,
+                        ) {
+                          final totalBytes =
+                              loadingProgress?.expectedTotalBytes;
+                          final bytesLoaded =
+                              loadingProgress?.cumulativeBytesLoaded;
+                          if (totalBytes != null && bytesLoaded != null) {
+                            return SizedBox(
+                              width: 120,
+                              height: 120,
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.white70,
+                                  value: bytesLoaded / totalBytes,
+                                  color: Colors.blue[900],
+                                  strokeWidth: 5.0,
+                                ),
+                              ),
+                            );
+                          } else {
+                            return child;
+                          }
+                        },
+                        frameBuilder: (
+                          BuildContext context,
+                          Widget child,
+                          int? frame,
+                          bool wasSynchronouslyLoaded,
+                        ) {
+                          if (wasSynchronouslyLoaded) {
+                            return child;
+                          }
+                          return AnimatedOpacity(
+                            opacity: frame == null ? 0 : 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeOut,
+                            child: child,
+                          );
+                        },
+                        fit: BoxFit.cover,
+                        errorBuilder: (
+                          BuildContext context,
+                          Object exception,
+                          StackTrace? stackTrace,
+                        ) {
+                          return SizedBox(
+                            width: 120,
+                            height: 120,
+                            child: Center(child: const Text('😢')),
+                          );
+                        },
+                      )
+                      : Image.asset(
+                        'assets/no_image_available.jpg',
+                        width: 120,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
             ),
             SizedBox(width: 12),
             Expanded(
