@@ -17,10 +17,12 @@ import 'package:shamo/providers/page_provider.dart';
 import 'package:shamo/providers/product_provider.dart';
 import 'package:shamo/providers/transaction_provider.dart';
 import 'package:shamo/providers/wishlist_provider.dart';
+import 'package:shamo/services/dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
+    await initApiConfig();
   runApp(MyApp());
 }
 

@@ -24,10 +24,10 @@ class ProfilePage extends StatelessWidget {
                 ClipOval(
                   child: Image.network(
                     '${user.profilePhotoUrl!}&size=54',
-                    width: 64,
+                    width: 54,
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: 15),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,14 +38,19 @@ class ProfilePage extends StatelessWidget {
                           fontSize: 24,
                           fontWeight: semiBold,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         '@${user.username}',
                         style: subtitleTextStyle.copyWith(fontSize: 16),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(width: 15),
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamedAndRemoveUntil(

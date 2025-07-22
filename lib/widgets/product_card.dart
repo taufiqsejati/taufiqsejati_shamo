@@ -30,7 +30,7 @@ class ProductCard extends StatelessWidget {
             SizedBox(height: 30),
             product.galleries!.isNotEmpty
                 ? Image.network(
-                  "https://flutter.github.io/assets-for-api-docs/assets/widgets/puffin.jpg",
+                  product.galleries![0].url!,
                   height: 150,
                   width: 215,
                   loadingBuilder: (

@@ -13,7 +13,7 @@ class EditProfilePage extends StatelessWidget {
     PreferredSizeWidget header() {
       return AppBar(
         leading: IconButton(
-          icon: Icon(Icons.close),
+          icon: Icon(Icons.close, color: primaryTextColor),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -21,7 +21,7 @@ class EditProfilePage extends StatelessWidget {
         backgroundColor: backgroundColor1,
         elevation: 0,
         centerTitle: true,
-        title: Text('Edit Profile'),
+        title: Text('Edit Profile', style: primaryTextStyle),
         actions: [
           IconButton(
             icon: Icon(Icons.check, color: primaryColor),

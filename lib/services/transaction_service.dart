@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:shamo/services/dio_helper.dart';
 import '../models/cart_model.dart';
 
 class TransactionService {
@@ -10,7 +12,7 @@ class TransactionService {
     List<CartModel> carts,
     double? totalPrice,
   ) async {
-    var url = Uri.parse('$baseUrl/checkout');
+    // var url = Uri.parse('$baseUrl/checkout');
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token.toString(),
@@ -28,9 +30,17 @@ class TransactionService {
       'shipping_price': 0,
     });
 
-    var response = await http.post(url, headers: headers, body: body);
+    final response = await DioHelper.dio!.post(
+      '/checkout',
+      data: body,
+      options: Options(
+        headers: headers,
+        validateStatus: (status) => status! < 500,
+      ),
+    );
+    // var response = await http.post(url, headers: headers, body: body);
 
-    print(response.body);
+    print(response.data);
 
     if (response.statusCode == 200) {
       return true;

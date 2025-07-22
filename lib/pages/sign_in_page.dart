@@ -11,11 +11,13 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController(
-    text: 'taufiqsejati01@gmail.com',
+    text: "jennie.kim2@blackpink.co",
+    // text: 'taufiqsejati01@gmail.com',
   );
 
   TextEditingController passwordController = TextEditingController(
-    text: 'pitza123',
+    text: "12345678",
+    // text: 'pitza123',
   );
 
   bool isLoading = false;
