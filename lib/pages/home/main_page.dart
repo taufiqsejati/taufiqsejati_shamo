@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
       return FloatingActionButton(
         shape: const CircleBorder(),
         onPressed: () {
-          // Navigator.pushNamed(context, '/cart');
+          Navigator.pushNamed(context, '/cart');
         },
         backgroundColor: secondaryColor,
         child: Image.asset('assets/icon_cart.png', width: 20),

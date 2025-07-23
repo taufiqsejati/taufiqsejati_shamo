@@ -22,7 +22,7 @@ import 'package:shamo/services/dio_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
-    await initApiConfig();
+  await initApiConfig();
   runApp(MyApp());
 }
 
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => WishlistProvider()),
-        // ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => TransactionProvider()),
         ChangeNotifierProvider(create: (context) => PageProvider()),
       ],
@@ -46,9 +46,9 @@ class MyApp extends StatelessWidget {
           '/sign-up': (context) => SignUpPage(),
           '/home': (context) => MainPage(),
           '/edit-profile': (context) => EditProfilePage(),
-          // '/cart': (context) => CartPage(),
-          // '/checkout': (context) => CheckoutPage(),
-          // '/checkout-success': (context) => CheckoutSuccessPage(),
+          '/cart': (context) => CartPage(),
+          '/checkout': (context) => CheckoutPage(),
+          '/checkout-success': (context) => CheckoutSuccessPage(),
         },
       ),
     );
