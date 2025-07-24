@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:shamo/pages/home/chat_page.dart';
+import 'package:shamo/pages/home/chat_page.dart';
 import 'package:shamo/pages/home/home_page.dart';
 import 'package:shamo/pages/home/profile_page.dart';
 import 'package:shamo/pages/home/wishlist_page.dart';
@@ -64,11 +64,10 @@ class _MainPageState extends State<MainPage> {
                     child: Image.asset(
                       'assets/icon_home.png',
                       width: 21,
-                      color:
-                          pageProvider.currentIndex == 0
-                              // currentIndex == 0
-                              ? primaryColor
-                              : Color(0xff808191),
+                      color: pageProvider.currentIndex == 0
+                          // currentIndex == 0
+                          ? primaryColor
+                          : Color(0xff808191),
                     ),
                   ),
                   label: '',
@@ -79,11 +78,10 @@ class _MainPageState extends State<MainPage> {
                     child: Image.asset(
                       'assets/icon_chat.png',
                       width: 20,
-                      color:
-                          pageProvider.currentIndex == 1
-                              // currentIndex == 1
-                              ? primaryColor
-                              : Color(0xff808191),
+                      color: pageProvider.currentIndex == 1
+                          // currentIndex == 1
+                          ? primaryColor
+                          : Color(0xff808191),
                     ),
                   ),
                   label: '',
@@ -94,11 +92,10 @@ class _MainPageState extends State<MainPage> {
                     child: Image.asset(
                       'assets/icon_wishlist.png',
                       width: 20,
-                      color:
-                          pageProvider.currentIndex == 2
-                              // currentIndex == 2
-                              ? primaryColor
-                              : Color(0xff808191),
+                      color: pageProvider.currentIndex == 2
+                          // currentIndex == 2
+                          ? primaryColor
+                          : Color(0xff808191),
                     ),
                   ),
                   label: '',
@@ -109,11 +106,10 @@ class _MainPageState extends State<MainPage> {
                     child: Image.asset(
                       'assets/icon_profile.png',
                       width: 18,
-                      color:
-                          pageProvider.currentIndex == 3
-                              // currentIndex == 3
-                              ? primaryColor
-                              : Color(0xff808191),
+                      color: pageProvider.currentIndex == 3
+                          // currentIndex == 3
+                          ? primaryColor
+                          : Color(0xff808191),
                     ),
                   ),
                   label: '',
@@ -131,8 +127,7 @@ class _MainPageState extends State<MainPage> {
           return HomePage();
           break;
         case 1:
-          return SizedBox();
-          // return ChatPage();
+          return ChatPage();
           break;
         case 2:
           return WishlistPage();
@@ -147,8 +142,9 @@ class _MainPageState extends State<MainPage> {
     }
 
     return Scaffold(
-      backgroundColor:
-          pageProvider.currentIndex == 0 ? backgroundColor1 : backgroundColor3,
+      backgroundColor: pageProvider.currentIndex == 0
+          ? backgroundColor1
+          : backgroundColor3,
       floatingActionButton: cartButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: customBottomNav(),

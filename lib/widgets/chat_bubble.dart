@@ -18,6 +18,7 @@ class ChatBubble extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 12),
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
+          border: Border.all(color: Colors.white),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(isSender ? 12 : 0),
             topRight: Radius.circular(isSender ? 0 : 12),
@@ -53,30 +54,35 @@ class ChatBubble extends StatelessWidget {
             SizedBox(height: 20),
             Row(
               children: [
-                OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: primaryColor),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      side: BorderSide(color: primaryColor),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
+                    child: Text('Add to Cart', style: purpleTextStyle),
                   ),
-                  child: Text('Add to Cart', style: purpleTextStyle),
                 ),
                 SizedBox(width: 8),
-                TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
-                  ),
-                  child: Text(
-                    'Buy Now',
-                    style: GoogleFonts.poppins(
-                      color: backgroundColor5,
-                      fontWeight: medium,
+                    child: Text(
+                      'Buy Now',
+                      style: GoogleFonts.poppins(
+                        color: backgroundColor5,
+                        fontWeight: medium,
+                      ),
                     ),
                   ),
                 ),
@@ -91,13 +97,16 @@ class ChatBubble extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.only(top: 30),
       child: Column(
-        crossAxisAlignment:
-            isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: isSender
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: [
-          product is UninitializedProductModel ? SizedBox() : productPreview(),
+          // product is UninitializedProductModel ? SizedBox() : productPreview(),
+          Text('wowo'),
           Row(
-            mainAxisAlignment:
-                isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+            mainAxisAlignment: isSender
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
             children: [
               Flexible(
                 child: Container(

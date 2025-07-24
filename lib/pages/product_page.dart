@@ -43,68 +43,64 @@ class _ProductPageState extends State<ProductPage> {
     Future<void> showSuccessDialog() async {
       return showDialog(
         context: context,
-        builder:
-            (BuildContext context) => Container(
-              width: MediaQuery.of(context).size.width - (2 * defaultMargin),
-              child: AlertDialog(
-                backgroundColor: backgroundColor3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                content: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(Icons.close, color: primaryTextColor),
-                        ),
-                      ),
-                      Image.asset('assets/icon_success.png', width: 100),
-                      SizedBox(height: 12),
-                      Text(
-                        'Hurray :)',
-                        style: primaryTextStyle.copyWith(
-                          fontSize: 18,
-                          fontWeight: semiBold,
-                        ),
-                      ),
-                      SizedBox(height: 12),
-                      Text(
-                        'Item added successfully',
-                        style: secondaryTextStyle,
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        width: 154,
-                        height: 44,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/cart');
-                          },
-                          style: TextButton.styleFrom(
-                            backgroundColor: primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: Text(
-                            'View My Cart',
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+        builder: (BuildContext context) => Container(
+          width: MediaQuery.of(context).size.width - (2 * defaultMargin),
+          child: AlertDialog(
+            backgroundColor: backgroundColor3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.close, color: primaryTextColor),
+                    ),
                   ),
-                ),
+                  Image.asset('assets/icon_success.png', width: 100),
+                  SizedBox(height: 12),
+                  Text(
+                    'Hurray :)',
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 18,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  Text('Item added successfully', style: secondaryTextStyle),
+                  SizedBox(height: 20),
+                  Container(
+                    width: 154,
+                    height: 44,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/cart');
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        'View My Cart',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 16,
+                          fontWeight: medium,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+          ),
+        ),
       );
     }
 
@@ -157,17 +153,16 @@ class _ProductPageState extends State<ProductPage> {
             ),
           ),
           CarouselSlider(
-            items:
-                widget.product.galleries!
-                    .map(
-                      (image) => Image.network(
-                        image.url!,
-                        width: MediaQuery.of(context).size.width,
-                        height: 310,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                    .toList(),
+            items: widget.product.galleries!
+                .map(
+                  (image) => Image.network(
+                    image.url!,
+                    width: MediaQuery.of(context).size.width,
+                    height: 310,
+                    fit: BoxFit.cover,
+                  ),
+                )
+                .toList(),
             options: CarouselOptions(
               initialPage: 0,
               onPageChanged: (index, reason) {
@@ -180,11 +175,10 @@ class _ProductPageState extends State<ProductPage> {
           SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children:
-                widget.product.galleries!.map((e) {
-                  index++;
-                  return indicator(index);
-                }).toList(),
+            children: widget.product.galleries!.map((e) {
+              index++;
+              return indicator(index);
+            }).toList(),
           ),
         ],
       );
@@ -337,16 +331,15 @@ class _ProductPageState extends State<ProductPage> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children:
-                          familiarShoes.map((image) {
-                            index++;
-                            return Container(
-                              margin: EdgeInsets.only(
-                                left: index == 0 ? defaultMargin : 0,
-                              ),
-                              child: familiarShoesCard(image),
-                            );
-                          }).toList(),
+                      children: familiarShoes.map((image) {
+                        index++;
+                        return Container(
+                          margin: EdgeInsets.only(
+                            left: index == 0 ? defaultMargin : 0,
+                          ),
+                          child: familiarShoesCard(image),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],
@@ -361,12 +354,12 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => DetailChatPage(widget.product),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailChatPage(widget.product),
+                        ),
+                      );
                     },
                     child: Container(
                       width: 54,

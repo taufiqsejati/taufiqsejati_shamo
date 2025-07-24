@@ -28,10 +28,9 @@ class MessageModel {
     userImage = json['userImage'];
     isFromUser = json['isFromUser'];
 
-    product =
-        json['product'] != null
-            ? new ProductModel.fromJson(json['product'])
-            : UninitializedProductModel();
+    product = json['product'] != null
+        ? new ProductModel.fromJson(json['product'])
+        : UninitializedProductModel();
     createdAt = DateTime.parse(json['createdAt']);
     updatedAt = DateTime.parse(json['updatedAt']);
   }

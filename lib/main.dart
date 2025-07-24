@@ -21,7 +21,7 @@ import 'package:shamo/services/dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   await initApiConfig();
   runApp(MyApp());
 }
