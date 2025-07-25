@@ -52,7 +52,7 @@ class MessageService {
             'isFromUser': isFromUser,
             'message': message,
             'product': product is UninitializedProductModel
-                ? {}
+                ? null
                 : product.toJson(),
             'createdAt': DateTime.now().toString(),
             'updatedAt': DateTime.now().toString(),

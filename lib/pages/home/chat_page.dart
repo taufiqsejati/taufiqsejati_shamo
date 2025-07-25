@@ -102,9 +102,9 @@ class ChatPage extends StatelessWidget {
               ),
             );
           } else {
-            // return emptyChat();
-            print("err : ${snapshot.data.toString()}");
-            return Text(snapshot.error.toString(), style: primaryTextStyle);
+            return emptyChat();
+            // print("err : ${snapshot.data.toString()}");
+            // return Text(snapshot.error.toString(), style: primaryTextStyle);
           }
         },
       );

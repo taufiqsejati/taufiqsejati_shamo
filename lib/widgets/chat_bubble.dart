@@ -101,8 +101,8 @@ class ChatBubble extends StatelessWidget {
             ? CrossAxisAlignment.end
             : CrossAxisAlignment.start,
         children: [
-          // product is UninitializedProductModel ? SizedBox() : productPreview(),
-          Text('wowo'),
+          product is UninitializedProductModel ? SizedBox() : productPreview(),
+          // Text('wowo'),
           Row(
             mainAxisAlignment: isSender
                 ? MainAxisAlignment.end
