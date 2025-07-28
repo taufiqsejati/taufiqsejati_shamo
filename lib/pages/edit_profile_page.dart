@@ -4,11 +4,56 @@ import 'package:shamo/models/user_model.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
-class EditProfilePage extends StatelessWidget {
+class EditProfilePage extends StatefulWidget {
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  bool isLoading = false;
+  // String? name = '';
+  // String? userName = '';
+  // String? email = '';
+
+  TextEditingController nameController = TextEditingController(text: "");
+  TextEditingController usernameController = TextEditingController(text: "");
+  TextEditingController emailController = TextEditingController(text: "");
+
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
+
+    nameController.text = user.name.toString();
+    usernameController.text = user.username.toString();
+    emailController.text = user.email.toString();
+
+    handleEdit() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.updateProfile(
+        email: emailController.text,
+        name: nameController.text,
+        username: usernameController.text,
+        token: user.token.toString(),
+      )) {
+        // Navigator.pushNamed(context, '/home');
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: Text('Gagal Update Profile!', textAlign: TextAlign.center),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
 
     PreferredSizeWidget header() {
       return AppBar(
@@ -25,7 +70,7 @@ class EditProfilePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.check, color: primaryColor),
-            onPressed: () {},
+            onPressed: handleEdit,
           ),
         ],
       );
@@ -40,8 +85,10 @@ class EditProfilePage extends StatelessWidget {
             Text('Name', style: secondaryTextStyle.copyWith(fontSize: 13)),
             TextFormField(
               style: primaryTextStyle,
+              // initialValue: "${user.name}",
+              controller: nameController,
               decoration: InputDecoration(
-                hintText: user.name,
+                // hintText: user.name,
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: subtitleColor),
@@ -62,8 +109,10 @@ class EditProfilePage extends StatelessWidget {
             Text('Username', style: secondaryTextStyle.copyWith(fontSize: 13)),
             TextFormField(
               style: primaryTextStyle,
+              // initialValue: "${user.username}",
+              controller: usernameController,
               decoration: InputDecoration(
-                hintText: '@${user.username}',
+                // hintText: '@${user.username}',
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: subtitleColor),
@@ -87,8 +136,10 @@ class EditProfilePage extends StatelessWidget {
             ),
             TextFormField(
               style: primaryTextStyle,
+              // initialValue: "${user.email}",
+              controller: emailController,
               decoration: InputDecoration(
-                hintText: user.email,
+                // hintText: user.email,
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: subtitleColor),

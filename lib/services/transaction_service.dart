@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:shamo/models/transaction_history_model.dart';
 import 'package:shamo/services/dio_helper.dart';
 import '../models/cart_model.dart';
 
@@ -19,12 +20,9 @@ class TransactionService {
     };
     var body = jsonEncode({
       'address': 'Marsemoon',
-      'items':
-          carts
-              .map(
-                (cart) => {'id': cart.product?.id, 'quantity': cart.quantity},
-              )
-              .toList(),
+      'items': carts
+          .map((cart) => {'id': cart.product?.id, 'quantity': cart.quantity})
+          .toList(),
       'status': "PENDING",
       'total_price': totalPrice,
       'shipping_price': 0,
@@ -46,6 +44,42 @@ class TransactionService {
       return true;
     } else {
       throw Exception('Gagal Melakukan Checkout!');
+    }
+  }
+
+  Future<List<TransactionHistoryModel>> getTransactionHistory(
+    String? token,
+  ) async {
+    // var url = Uri.parse('$baseUrl/products');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+    };
+
+    final response = await DioHelper.dio!.get(
+      '/transactions',
+      options: Options(
+        headers: headers,
+        validateStatus: (status) => status! < 500,
+      ),
+    );
+    // var response = await http.get(url, headers: headers);
+
+    print('sukses get data : ${response.data}');
+
+    if (response.statusCode == 200) {
+      List data = response.data['data']['data'];
+      print('sukses get data 2 : ${data}');
+      List<TransactionHistoryModel> transactionHistory = [];
+
+      for (var item in data) {
+        print('sukses procut $item');
+        transactionHistory.add(TransactionHistoryModel.fromJson(item));
+      }
+      print('popular product');
+      return transactionHistory;
+    } else {
+      throw Exception('Gagal Get Products!');
     }
   }
 }

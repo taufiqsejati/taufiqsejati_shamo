@@ -25,7 +25,7 @@ class ProductService {
       List<ProductModel> products = [];
 
       for (var item in data) {
-        print('sukses $item');
+        print('sukses procut $item');
         products.add(ProductModel.fromJson(item));
       }
       print('popular product');

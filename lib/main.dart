@@ -19,6 +19,10 @@ import 'package:shamo/providers/transaction_provider.dart';
 import 'package:shamo/providers/wishlist_provider.dart';
 import 'package:shamo/services/dio_helper.dart';
 
+import 'pages/history_transaction_page.dart';
+import 'providers/custom_provider.dart';
+import 'providers/transaction_history_provider.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -36,7 +40,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => WishlistProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => TransactionProvider()),
+        ChangeNotifierProvider(
+          create: (context) => TransactionHistoryProvider(),
+        ),
         ChangeNotifierProvider(create: (context) => PageProvider()),
+        ChangeNotifierProvider(create: (context) => CustomProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -49,6 +57,7 @@ class MyApp extends StatelessWidget {
           '/cart': (context) => CartPage(),
           '/checkout': (context) => CheckoutPage(),
           '/checkout-success': (context) => CheckoutSuccessPage(),
+          '/history-transaction': (context) => HistoryTransactionPage(),
         },
       ),
     );

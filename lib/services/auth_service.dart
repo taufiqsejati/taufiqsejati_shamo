@@ -67,4 +67,39 @@ class AuthService {
       throw Exception('Gagal Login');
     }
   }
+
+  Future<UserModel> updateProfile({
+    String? name,
+    String? username,
+    String? email,
+    String? token,
+  }) async {
+    // var url = Uri.parse('$baseUrl/register');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+    };
+    var body = jsonEncode({'name': name, 'username': username, 'email': email});
+
+    final response = await DioHelper.dio!.post(
+      '/user',
+      data: body,
+      options: Options(
+        headers: headers,
+        validateStatus: (status) => status! < 500,
+      ),
+    );
+    // var response = await http.post(url, headers: headers, body: body);
+
+    print(response.data);
+
+    if (response.statusCode == 200) {
+      var data = response.data['data'];
+      UserModel user = UserModel.fromJson(data);
+
+      return user;
+    } else {
+      throw Exception('Gagal Register');
+    }
+  }
 }

@@ -30,5 +30,5 @@ class DioHelper {
 }
 
 initApiConfig() async {
-  await DioHelper.init("http://192.168.178.218:8000");
+  await DioHelper.init("http://192.168.77.19:8000");
 }

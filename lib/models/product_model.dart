@@ -7,6 +7,7 @@ class ProductModel {
   double? price;
   String? description;
   String? tags;
+  int? categoriesId;
   DateTime? createdAt;
   DateTime? updatedAt;
   CategoryModel? category;
@@ -18,6 +19,7 @@ class ProductModel {
     this.price,
     this.description,
     this.tags,
+    this.categoriesId,
     this.createdAt,
     this.updatedAt,
     this.category,
@@ -30,12 +32,12 @@ class ProductModel {
     price = double.parse(json['price'].toString());
     description = json['description'];
     tags = json['tags'];
+    categoriesId = json['categories_id'];
     createdAt = DateTime.parse(json['created_at']);
     updatedAt = DateTime.parse(json['updated_at']);
-    category =
-        json['category'] != null
-            ? new CategoryModel.fromJson(json['category'])
-            : null;
+    category = json['category'] != null
+        ? new CategoryModel.fromJson(json['category'])
+        : null;
     if (json['galleries'] != null) {
       galleries = <GalleryModel>[];
       json['galleries'].forEach((v) {
@@ -51,6 +53,7 @@ class ProductModel {
     data['price'] = this.price;
     data['description'] = this.description;
     data['tags'] = this.tags;
+    data['categories_id'] = this.categoriesId;
     data['created_at'] = this.createdAt.toString();
     data['updated_at'] = this.updatedAt.toString();
     if (this.category != null) {

@@ -104,19 +104,24 @@ class ProfilePage extends StatelessWidget {
                 },
                 child: menuItem('Edit Profile'),
               ),
-              menuItem('Your Orders'),
-              menuItem('Help'),
-              SizedBox(height: 30),
-              Text(
-                'General',
-                style: primaryTextStyle.copyWith(
-                  fontSize: 16,
-                  fontWeight: semiBold,
-                ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/history-transaction');
+                },
+                child: menuItem('Your Orders'),
               ),
-              menuItem('Privacy & Policy'),
-              menuItem('Term of Service'),
-              menuItem('Rate App'),
+              // menuItem('Help'),
+              // SizedBox(height: 30),
+              // Text(
+              //   'General',
+              //   style: primaryTextStyle.copyWith(
+              //     fontSize: 16,
+              //     fontWeight: semiBold,
+              //   ),
+              // ),
+              // menuItem('Privacy & Policy'),
+              // menuItem('Term of Service'),
+              // menuItem('Rate App'),
             ],
           ),
         ),
