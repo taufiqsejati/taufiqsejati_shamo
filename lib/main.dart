@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/pages/cart_page.dart';
 import 'package:shamo/pages/checkout_page.dart';
@@ -17,16 +18,22 @@ import 'package:shamo/providers/page_provider.dart';
 import 'package:shamo/providers/product_provider.dart';
 import 'package:shamo/providers/transaction_provider.dart';
 import 'package:shamo/providers/wishlist_provider.dart';
-import 'package:shamo/services/dio_helper.dart';
+import 'package:shamo/utils/dio_helper.dart';
 
+import 'models/users_model.dart';
 import 'pages/history_transaction_page.dart';
 import 'providers/custom_provider.dart';
 import 'providers/transaction_history_provider.dart';
+import 'utils/setup_locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  Hive.registerAdapter(MUsersAdapter());
+  setupGetit();
   await initApiConfig();
+  await initDb();
   runApp(MyApp());
 }
 

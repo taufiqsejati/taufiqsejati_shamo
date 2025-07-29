@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 
+import 'config.dart';
+
 class DioHelper {
   static Dio? dio;
   static String? cookies;
@@ -29,6 +31,3 @@ class DioHelper {
   }
 }
 
-initApiConfig() async {
-  await DioHelper.init("http://192.168.77.19:8000");
-}

@@ -7,6 +7,8 @@ import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/checkout_card.dart';
 import 'package:shamo/widgets/loading_button.dart';
 
+import '../utils/config.dart';
+
 class CheckoutPage extends StatefulWidget {
   @override
   _CheckoutPageState createState() => _CheckoutPageState();
@@ -21,7 +23,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     TransactionProvider transactionProvider = Provider.of<TransactionProvider>(
       context,
     );
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     handleCheckout() async {
       setState(() {
@@ -29,7 +31,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       });
 
       if (await transactionProvider.checkout(
-        authProvider.user.token.toString(),
+        Config().token.toString(),
         cartProvider.carts,
         cartProvider.totalPrice(),
       )) {
@@ -79,10 +81,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ),
                 ),
                 Column(
-                  children:
-                      cartProvider.carts
-                          .map((cart) => CheckoutCard(cart))
-                          .toList(),
+                  children: cartProvider.carts
+                      .map((cart) => CheckoutCard(cart))
+                      .toList(),
                 ),
               ],
             ),
@@ -239,30 +240,30 @@ class _CheckoutPageState extends State<CheckoutPage> {
           Divider(thickness: 1, color: Color(0xff2E3141)),
           isLoading
               ? Container(
-                margin: EdgeInsets.only(bottom: 30),
-                child: LoadingButton(),
-              )
+                  margin: EdgeInsets.only(bottom: 30),
+                  child: LoadingButton(),
+                )
               : Container(
-                height: 50,
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(vertical: defaultMargin),
-                child: TextButton(
-                  onPressed: handleCheckout,
-                  style: TextButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                  height: 50,
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(vertical: defaultMargin),
+                  child: TextButton(
+                    onPressed: handleCheckout,
+                    style: TextButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
-                  ),
-                  child: Text(
-                    'Checkout Now',
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: semiBold,
+                    child: Text(
+                      'Checkout Now',
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: semiBold,
+                      ),
                     ),
                   ),
                 ),
-              ),
           SizedBox(height: defaultMargin * 2),
         ],
       );

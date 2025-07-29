@@ -7,11 +7,12 @@ import 'package:shamo/services/message_service.dart';
 import 'package:shamo/widgets/chat_tile.dart';
 
 import '../../theme.dart';
+import '../../utils/config.dart';
 
 class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
     PageProvider pageProvider = Provider.of<PageProvider>(context);
 
     Widget header() {
@@ -81,7 +82,7 @@ class ChatPage extends StatelessWidget {
     Widget content() {
       return StreamBuilder<List<MessageModel>>(
         stream: MessageService().getMessagesByUserId(
-          userId: authProvider.user.id!,
+          userId: Config().users.id!,
         ),
         builder: (context, snapshot) {
           if (snapshot.hasData) {

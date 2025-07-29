@@ -4,6 +4,8 @@ import 'package:shamo/models/user_model.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
+import '../utils/config.dart';
+
 class EditProfilePage extends StatefulWidget {
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -24,9 +26,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
 
-    nameController.text = user.name.toString();
-    usernameController.text = user.username.toString();
-    emailController.text = user.email.toString();
+    nameController.text = Config().users.name.toString();
+    usernameController.text = Config().users.username.toString();
+    emailController.text = Config().users.email.toString();
 
     handleEdit() async {
       setState(() {

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:shamo/models/product_model.dart';
-import 'package:shamo/services/dio_helper.dart';
+import 'package:shamo/utils/dio_helper.dart';
 
 class ProductService {
   String baseUrl = 'http://project-taufiqsejati.my.id/api';

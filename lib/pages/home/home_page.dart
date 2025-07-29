@@ -9,6 +9,7 @@ import 'package:shamo/widgets/product_tile.dart';
 
 import '../../dimens.dart';
 import '../../models/product_model.dart';
+import '../../utils/config.dart';
 import '../../widgets/custom_tabbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -66,8 +67,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
+    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // UserModel user = authProvider.user;
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
 
     Widget header() {
@@ -84,29 +85,29 @@ class _HomePageState extends State<HomePage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, ${user.name}',
+                    'Hallo, ${Config().users.name}',
                     style: primaryTextStyle.copyWith(
                       fontSize: 24,
                       fontWeight: semiBold,
                     ),
                   ),
                   Text(
-                    '@${user.username}',
+                    '@${Config().users.username}',
                     style: subtitleTextStyle.copyWith(fontSize: 16),
                   ),
                 ],
               ),
             ),
-            Container(
-              width: 54,
-              height: 54,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: NetworkImage('${user.profilePhotoUrl!}&size=54'),
-                ),
-              ),
-            ),
+            // Container(
+            //   width: 54,
+            //   height: 54,
+            //   decoration: BoxDecoration(
+            //     shape: BoxShape.circle,
+            //     image: DecorationImage(
+            //       image: NetworkImage('${user.profilePhotoUrl!}&size=54'),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       );

@@ -5,7 +5,10 @@ import 'package:shamo/models/product_model.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/services/message_service.dart';
 import 'package:shamo/theme.dart';
+import 'package:shamo/utils/config.dart';
 import 'package:shamo/widgets/chat_bubble.dart';
+
+import '../models/user_model.dart';
 
 class DetailChatPage extends StatefulWidget {
   ProductModel product;
@@ -20,11 +23,25 @@ class _DetailChatPageState extends State<DetailChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     handleAddMessage() async {
+      UserModel user = UserModel(
+        id: Config().users.id,
+        email: Config().users.email,
+        name: Config().users.name,
+        username: Config().users.username,
+        phone: Config().users.phone,
+        roles: Config().users.roles,
+        currentTeamId: Config().users.currentTeamId,
+        profilePhotoUrl: Config().users.profilePhotoUrl,
+        emailVerifiedAt: Config().users.emailVerifiedAt,
+        profilePhotoPath: Config().users.profilePhotoPath,
+        createdAt: Config().users.createdAt,
+        updatedAt: Config().users.updatedAt,
+      );
       await MessageService().addMessage(
-        user: authProvider.user,
+        user: user,
         isFromUser: true,
         product: widget.product,
         message: messageController.text,
@@ -177,7 +194,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
     Widget content() {
       return StreamBuilder<List<MessageModel>>(
         stream: MessageService().getMessagesByUserId(
-          userId: authProvider.user.id!,
+          userId: Config().users.id!,
         ),
         builder: (context, snapshot) {
           print("error : ${snapshot}");

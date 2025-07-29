@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:shamo/models/transaction_history_model.dart';
-import 'package:shamo/services/dio_helper.dart';
+import 'package:shamo/utils/dio_helper.dart';
 import '../models/cart_model.dart';
 
 class TransactionService {

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shamo/models/user_model.dart';
+import 'package:shamo/models/users_model.dart';
 import 'package:shamo/services/auth_service.dart';
+
+import '../utils/config.dart';
 
 class AuthProvider with ChangeNotifier {
   UserModel? _user;
@@ -42,6 +45,30 @@ class AuthProvider with ChangeNotifier {
       );
 
       _user = user;
+
+      await Config.set('email', user.email);
+      await Config.set('fullName', user.name);
+      await Config.set('username', user.username);
+      await Config.set('password', password);
+      await Config.set('token', 'Bearer ${user.token.toString()}');
+      await Config.set(
+        'users',
+        MUsers(
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          username: user.username,
+          phone: user.phone,
+          roles: user.roles,
+          currentTeamId: user.currentTeamId,
+          profilePhotoUrl: user.profilePhotoUrl,
+          emailVerifiedAt: user.emailVerifiedAt,
+          profilePhotoPath: user.profilePhotoPath,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        ),
+      );
+      await Config.set('isLoggedIn', true);
       return true;
     } catch (e) {
       print(e);
@@ -64,7 +91,40 @@ class AuthProvider with ChangeNotifier {
       );
 
       _user = user;
+      await Config.set('email', user.email);
+      await Config.set('fullName', user.name);
+      await Config.set('username', user.username);
+      await Config.set(
+        'users',
+        MUsers(
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          username: user.username,
+          phone: user.phone,
+          roles: user.roles,
+          currentTeamId: user.currentTeamId,
+          profilePhotoUrl: user.profilePhotoUrl,
+          emailVerifiedAt: user.emailVerifiedAt,
+          profilePhotoPath: user.profilePhotoPath,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        ),
+      );
       return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> logout(String token) async {
+    try {
+      if (await AuthService().logout(token)) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       print(e);
       return false;

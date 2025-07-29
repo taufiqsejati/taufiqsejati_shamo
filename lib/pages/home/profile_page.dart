@@ -4,12 +4,37 @@ import 'package:shamo/models/user_model.dart';
 import 'package:shamo/providers/auth_provider.dart';
 
 import '../../theme.dart';
+import '../../utils/config.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
+    // UserModel user = authProvider.user;
+
+    handleLogout() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.logout(Config().token.toString())) {
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil("/sign-in", (route) => false);
+        await Config.set('isLoggedIn', false);
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
 
     Widget header() {
       return AppBar(
@@ -23,7 +48,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                 ClipOval(
                   child: Image.network(
-                    '${user.profilePhotoUrl!}&size=54',
+                    '${Config().users.profilePhotoUrl!}&size=54',
                     width: 54,
                   ),
                 ),
@@ -33,7 +58,7 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hallo, ${user.name}',
+                        'Hallo, ${Config().users.name}',
                         style: primaryTextStyle.copyWith(
                           fontSize: 24,
                           fontWeight: semiBold,
@@ -42,7 +67,7 @@ class ProfilePage extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        '@${user.username}',
+                        '@${Config().users.username}',
                         style: subtitleTextStyle.copyWith(fontSize: 16),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -52,13 +77,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 const SizedBox(width: 15),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      '/sign-in',
-                      (route) => false,
-                    );
-                  },
+                  onTap: handleLogout,
                   child: Image.asset('assets/button_exit.png', width: 20),
                 ),
               ],

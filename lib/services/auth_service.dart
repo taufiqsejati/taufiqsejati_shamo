@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:shamo/models/user_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:shamo/services/dio_helper.dart';
+import 'package:shamo/utils/dio_helper.dart';
 
 class AuthService {
   String baseUrl = 'http://project-taufiqsejati.my.id/api';
@@ -100,6 +100,31 @@ class AuthService {
       return user;
     } else {
       throw Exception('Gagal Register');
+    }
+  }
+
+  Future<bool> logout(String? token) async {
+    // var url = Uri.parse('$baseUrl/logout');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+    };
+
+    final response = await DioHelper.dio!.post(
+      '/logout',
+      options: Options(
+        headers: headers,
+        validateStatus: (status) => status! < 500,
+      ),
+    );
+    // var response = await http.post(url, headers: headers, body: body);
+
+    print(response.data);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Gagal Melakukan Logout!');
     }
   }
 }

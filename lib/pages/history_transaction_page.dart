@@ -7,6 +7,7 @@ import '../models/user_model.dart';
 import '../providers/auth_provider.dart';
 import '../providers/transaction_history_provider.dart';
 import '../theme.dart';
+import '../utils/config.dart';
 
 class HistoryTransactionPage extends StatefulWidget {
   const HistoryTransactionPage({super.key});
@@ -19,12 +20,12 @@ class _HistoryTransactionPageState extends State<HistoryTransactionPage> {
   @override
   Widget build(BuildContext context) {
     Jiffy.setLocale("ID");
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
+    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // UserModel user = authProvider.user;
     TransactionHistoryProvider transactionHistoryProvider =
         Provider.of<TransactionHistoryProvider>(context);
 
-    transactionHistoryProvider.getTransactionHistory(user.token.toString());
+    transactionHistoryProvider.getTransactionHistory(Config().token.toString());
 
     PreferredSizeWidget header() {
       return AppBar(

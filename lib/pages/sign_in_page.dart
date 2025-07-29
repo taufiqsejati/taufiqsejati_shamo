@@ -4,6 +4,8 @@ import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/loading_button.dart';
 
+import '../providers/page_provider.dart';
+
 class SignInPage extends StatefulWidget {
   @override
   _SignInPageState createState() => _SignInPageState();
@@ -25,6 +27,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
 
     handleSignIn() async {
       setState(() {
@@ -35,7 +38,11 @@ class _SignInPageState extends State<SignInPage> {
         email: emailController.text,
         password: passwordController.text,
       )) {
-        Navigator.pushNamed(context, '/home');
+        // Navigator.pushNamed(context, '/home');
+        pageProvider.currentIndex = 0;
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil("/home", (route) => false);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

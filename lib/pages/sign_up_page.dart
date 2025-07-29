@@ -35,15 +35,14 @@ class _SignUpPageState extends State<SignUpPage> {
         email: emailController.text,
         password: passwordController.text,
       )) {
-        Navigator.pushNamed(context, '/home');
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil("/home", (route) => false);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: alertColor,
-            content: Text(
-              'Gagal Register!',
-              textAlign: TextAlign.center,
-            ),
+            content: Text('Gagal Register!', textAlign: TextAlign.center),
           ),
         );
       }
@@ -66,13 +65,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 fontWeight: semiBold,
               ),
             ),
-            SizedBox(
-              height: 2,
-            ),
-            Text(
-              'Register and Happy Shoping',
-              style: subtitleTextStyle,
-            ),
+            SizedBox(height: 2),
+            Text('Register and Happy Shoping', style: subtitleTextStyle),
           ],
         ),
       );
@@ -91,14 +85,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 fontWeight: medium,
               ),
             ),
-            SizedBox(
-              height: 12,
-            ),
+            SizedBox(height: 12),
             Container(
               height: 50,
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: backgroundColor2,
                 borderRadius: BorderRadius.circular(12),
@@ -106,13 +96,8 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Center(
                 child: Row(
                   children: [
-                    Image.asset(
-                      'assets/icon_name.png',
-                      width: 17,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
+                    Image.asset('assets/icon_name.png', width: 17),
+                    SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
@@ -145,14 +130,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 fontWeight: medium,
               ),
             ),
-            SizedBox(
-              height: 12,
-            ),
+            SizedBox(height: 12),
             Container(
               height: 50,
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: backgroundColor2,
                 borderRadius: BorderRadius.circular(12),
@@ -160,13 +141,8 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Center(
                 child: Row(
                   children: [
-                    Image.asset(
-                      'assets/icon_username.png',
-                      width: 17,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
+                    Image.asset('assets/icon_username.png', width: 17),
+                    SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
@@ -199,14 +175,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 fontWeight: medium,
               ),
             ),
-            SizedBox(
-              height: 12,
-            ),
+            SizedBox(height: 12),
             Container(
               height: 50,
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: backgroundColor2,
                 borderRadius: BorderRadius.circular(12),
@@ -214,13 +186,8 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Center(
                 child: Row(
                   children: [
-                    Image.asset(
-                      'assets/icon_email.png',
-                      width: 17,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
+                    Image.asset('assets/icon_email.png', width: 17),
+                    SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
@@ -253,14 +220,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 fontWeight: medium,
               ),
             ),
-            SizedBox(
-              height: 12,
-            ),
+            SizedBox(height: 12),
             Container(
               height: 50,
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: backgroundColor2,
                 borderRadius: BorderRadius.circular(12),
@@ -268,13 +231,8 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Center(
                 child: Row(
                   children: [
-                    Image.asset(
-                      'assets/icon_password.png',
-                      width: 17,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
+                    Image.asset('assets/icon_password.png', width: 17),
+                    SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
@@ -310,10 +268,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           child: Text(
             'Sign Up',
-            style: primaryTextStyle.copyWith(
-              fontSize: 16,
-              fontWeight: medium,
-            ),
+            style: primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
           ),
         ),
       );
@@ -327,9 +282,7 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Text(
               'Already have an account? ',
-              style: subtitleTextStyle.copyWith(
-                fontSize: 12,
-              ),
+              style: subtitleTextStyle.copyWith(fontSize: 12),
             ),
             GestureDetector(
               onTap: () {
@@ -353,9 +306,7 @@ class _SignUpPageState extends State<SignUpPage> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: defaultMargin,
-          ),
+          margin: EdgeInsets.symmetric(horizontal: defaultMargin),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
