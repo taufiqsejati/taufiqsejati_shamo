@@ -1,4 +1,4 @@
-import 'package:shamo/models/product_model.dart';
+import './models.dart';
 
 class MessageModel {
   String? message;

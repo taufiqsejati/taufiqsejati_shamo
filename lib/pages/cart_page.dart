@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/providers/cart_provider.dart';
-import 'package:shamo/theme.dart';
-import 'package:shamo/widgets/cart_card.dart';
+
+import '../providers/providers.dart';
+import '../theme.dart';
+import '../widgets/widgets.dart';
 
 class CartPage extends StatelessWidget {
   @override
@@ -142,8 +143,9 @@ class CartPage extends StatelessWidget {
       backgroundColor: backgroundColor3,
       appBar: header(),
       body: cartProvider.carts.length == 0 ? emptyCart() : content(),
-      bottomNavigationBar:
-          cartProvider.carts.length == 0 ? SizedBox() : customBottomNav(),
+      bottomNavigationBar: cartProvider.carts.length == 0
+          ? SizedBox()
+          : customBottomNav(),
     );
   }
 }

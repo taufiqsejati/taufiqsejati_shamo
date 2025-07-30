@@ -3,11 +3,9 @@ import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
 import '../dimens.dart';
-import '../models/user_model.dart';
-import '../providers/auth_provider.dart';
-import '../providers/transaction_history_provider.dart';
+import '../providers/providers.dart';
 import '../theme.dart';
-import '../utils/config.dart';
+import '../utils/utils.dart';
 
 class HistoryTransactionPage extends StatefulWidget {
   const HistoryTransactionPage({super.key});
@@ -25,7 +23,7 @@ class _HistoryTransactionPageState extends State<HistoryTransactionPage> {
     TransactionHistoryProvider transactionHistoryProvider =
         Provider.of<TransactionHistoryProvider>(context);
 
-    transactionHistoryProvider.getTransactionHistory(Config().token.toString());
+    // transactionHistoryProvider.getTransactionHistory(Config().token.toString());
 
     PreferredSizeWidget header() {
       return AppBar(

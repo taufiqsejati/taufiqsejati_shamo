@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/pages/home/chat_page.dart';
-import 'package:shamo/pages/home/home_page.dart';
-import 'package:shamo/pages/home/profile_page.dart';
-import 'package:shamo/pages/home/wishlist_page.dart';
-import 'package:shamo/providers/page_provider.dart';
-import 'package:shamo/theme.dart';
+
+import '../../providers/providers.dart';
+import '../../theme.dart';
+import '../pages.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -51,7 +49,6 @@ class _MainPageState extends State<MainPage> {
               // currentIndex: currentIndex,
               currentIndex: pageProvider.currentIndex,
               onTap: (value) {
-                print(value);
                 // currentIndex = value;
                 // setState(() {});
                 pageProvider.currentIndex = value;

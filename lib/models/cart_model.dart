@@ -1,4 +1,4 @@
-import 'package:shamo/models/product_model.dart';
+import './models.dart';
 
 class CartModel {
   int? id;
@@ -9,10 +9,9 @@ class CartModel {
 
   CartModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    product =
-        json['product'] != null
-            ? new ProductModel.fromJson(json['product'])
-            : null;
+    product = json['product'] != null
+        ? new ProductModel.fromJson(json['product'])
+        : null;
     quantity = json['quantity'];
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../dimens.dart';
-import '../providers/custom_provider.dart';
+import '../providers/providers.dart';
 import '../theme.dart';
 
 class CustomTabbar extends StatefulWidget {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shamo/models/message_model.dart';
-import 'package:shamo/models/product_model.dart';
-import 'package:shamo/pages/detail_chat_page.dart';
-import 'package:shamo/theme.dart';
+import '../pages/pages.dart';
+import '../models/models.dart';
+import '../theme.dart';
 
 class ChatTile extends StatelessWidget {
   final MessageModel message;

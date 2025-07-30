@@ -2,29 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/pages/cart_page.dart';
-import 'package:shamo/pages/checkout_page.dart';
-import 'package:shamo/pages/checkout_success_page.dart';
-// import 'package:shamo/pages/detail_chat_page.dart';
-import 'package:shamo/pages/edit_profile_page.dart';
-import 'package:shamo/pages/home/main_page.dart';
-// import 'package:shamo/pages/product_page.dart';
-import 'package:shamo/pages/sign_in_page.dart';
-import 'package:shamo/pages/sign_up_page.dart';
-import 'package:shamo/pages/splash_page.dart';
-import 'package:shamo/providers/auth_provider.dart';
-import 'package:shamo/providers/cart_provider.dart';
-import 'package:shamo/providers/page_provider.dart';
-import 'package:shamo/providers/product_provider.dart';
-import 'package:shamo/providers/transaction_provider.dart';
-import 'package:shamo/providers/wishlist_provider.dart';
-import 'package:shamo/utils/dio_helper.dart';
 
-import 'models/users_model.dart';
-import 'pages/history_transaction_page.dart';
-import 'providers/custom_provider.dart';
-import 'providers/transaction_history_provider.dart';
-import 'utils/setup_locator.dart';
+import 'models/models.dart';
+import 'pages/pages.dart';
+import 'providers/providers.dart';
+import 'utils/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

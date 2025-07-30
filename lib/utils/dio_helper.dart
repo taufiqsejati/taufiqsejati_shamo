@@ -1,8 +1,7 @@
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-
-import 'config.dart';
 
 class DioHelper {
   static Dio? dio;
@@ -30,4 +29,3 @@ class DioHelper {
     );
   }
 }
-

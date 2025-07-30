@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/providers/auth_provider.dart';
-import 'package:shamo/theme.dart';
-import 'package:shamo/widgets/loading_button.dart';
+
+import '../providers/providers.dart';
+import '../theme.dart';
+import '../widgets/widgets.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

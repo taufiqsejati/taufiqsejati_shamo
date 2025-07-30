@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shamo/models/message_model.dart';
-import 'package:shamo/models/product_model.dart';
-import 'package:shamo/providers/auth_provider.dart';
-import 'package:shamo/services/message_service.dart';
-import 'package:shamo/theme.dart';
-import 'package:shamo/utils/config.dart';
-import 'package:shamo/widgets/chat_bubble.dart';
 
-import '../models/user_model.dart';
+import '../models/models.dart';
+import '../services/services.dart';
+import '../theme.dart';
+import '../utils/utils.dart';
+import '../widgets/widgets.dart';
 
 class DetailChatPage extends StatefulWidget {
   ProductModel product;
@@ -197,7 +193,6 @@ class _DetailChatPageState extends State<DetailChatPage> {
           userId: Config().users.id!,
         ),
         builder: (context, snapshot) {
-          print("error : ${snapshot}");
           if (snapshot.hasData) {
             return ListView(
               padding: EdgeInsets.symmetric(horizontal: defaultMargin),

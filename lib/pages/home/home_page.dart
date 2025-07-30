@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/models/user_model.dart';
-import 'package:shamo/providers/auth_provider.dart';
-import 'package:shamo/providers/product_provider.dart';
-import 'package:shamo/theme.dart';
-import 'package:shamo/widgets/product_card.dart';
-import 'package:shamo/widgets/product_tile.dart';
 
+import '../../theme.dart';
 import '../../dimens.dart';
-import '../../models/product_model.dart';
+import '../../providers/providers.dart';
+import '../../models/models.dart';
 import '../../utils/config.dart';
-import '../../widgets/custom_tabbar.dart';
+import '../../widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -452,11 +448,23 @@ class _HomePageState extends State<HomePage>
     Widget newArrivals() {
       return Container(
         margin: EdgeInsets.only(top: 14),
-        child: Column(
-          children: productProvider.products
-              .map((product) => ProductTile(product))
-              .toList(),
-        ),
+        child: productProvider.products.isNotEmpty
+            ? Column(
+                children: productProvider.products
+                    .map((product) => ProductTile(product))
+                    .toList(),
+              )
+            : Container(
+                height: 278,
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    "Data Tidak Tersedia",
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
       );
     }
 

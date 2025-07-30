@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:shamo/models/user_model.dart';
-import 'package:http/http.dart' as http;
-import 'package:shamo/utils/dio_helper.dart';
+import '../models/models.dart';
+import '../utils/utils.dart';
 
 class AuthService {
   String baseUrl = 'http://project-taufiqsejati.my.id/api';
@@ -30,8 +28,6 @@ class AuthService {
     );
     // var response = await http.post(url, headers: headers, body: body);
 
-    print(response.data);
-
     if (response.statusCode == 200) {
       var data = response.data['data'];
       UserModel user = UserModel.fromJson(data['user']);
@@ -54,8 +50,6 @@ class AuthService {
       data: body,
       options: Options(validateStatus: (status) => status! < 500),
     );
-
-    print(response.data);
 
     if (response.statusCode == 200) {
       var data = response.data['data'];
@@ -91,8 +85,6 @@ class AuthService {
     );
     // var response = await http.post(url, headers: headers, body: body);
 
-    print(response.data);
-
     if (response.statusCode == 200) {
       var data = response.data['data'];
       UserModel user = UserModel.fromJson(data);
@@ -118,8 +110,6 @@ class AuthService {
       ),
     );
     // var response = await http.post(url, headers: headers, body: body);
-
-    print(response.data);
 
     if (response.statusCode == 200) {
       return true;

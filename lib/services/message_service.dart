@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shamo/models/message_model.dart';
-import 'package:shamo/models/product_model.dart';
-import 'package:shamo/models/user_model.dart';
+
+import '../models/models.dart';
 
 class MessageService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -18,12 +17,8 @@ class MessageService {
             ) {
               Map<String, dynamic> datos =
                   message.data() as Map<String, dynamic>;
-              print("sebelum err : ${datos["product"]}");
-
               return MessageModel.fromJson(datos);
             }).toList();
-            print("setelah err :");
-
             result.sort(
               (MessageModel a, MessageModel b) =>
                   a.createdAt!.compareTo(b.createdAt!),

@@ -1,9 +1,8 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
-import 'package:shamo/models/transaction_history_model.dart';
-import 'package:shamo/utils/dio_helper.dart';
-import '../models/cart_model.dart';
+import '../models/models.dart';
+import '../utils/utils.dart';
 
 class TransactionService {
   String baseUrl = 'http://project-taufiqsejati.my.id/api';
@@ -38,8 +37,6 @@ class TransactionService {
     );
     // var response = await http.post(url, headers: headers, body: body);
 
-    print(response.data);
-
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -65,18 +62,13 @@ class TransactionService {
     );
     // var response = await http.get(url, headers: headers);
 
-    print('sukses get data : ${response.data}');
-
     if (response.statusCode == 200) {
       List data = response.data['data']['data'];
-      print('sukses get data 2 : ${data}');
       List<TransactionHistoryModel> transactionHistory = [];
 
       for (var item in data) {
-        print('sukses procut $item');
         transactionHistory.add(TransactionHistoryModel.fromJson(item));
       }
-      print('popular product');
       return transactionHistory;
     } else {
       throw Exception('Gagal Get Products!');

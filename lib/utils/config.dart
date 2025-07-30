@@ -1,8 +1,6 @@
-import 'package:shamo/models/users_model.dart';
-
 import '../data_dummy/data_dummy.dart';
-import 'setup_locator.dart';
-import 'storage_service.dart';
+import '../models/models.dart';
+import './utils.dart';
 
 class Config {
   static var configContainer = getIt<StorageService>().getHiveBox('config');

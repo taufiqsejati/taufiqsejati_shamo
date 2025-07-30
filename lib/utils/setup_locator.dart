@@ -1,8 +1,6 @@
 import 'package:get_it/get_it.dart';
 
-import 'config.dart';
-import 'dio_helper.dart';
-import 'storage_service.dart';
+import './utils.dart';
 
 final getIt = GetIt.instance;
 

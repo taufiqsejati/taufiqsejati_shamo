@@ -1,4 +1,4 @@
-import 'product_model.dart';
+import './models.dart';
 
 class TransactionHistoryModel {
   int? id;

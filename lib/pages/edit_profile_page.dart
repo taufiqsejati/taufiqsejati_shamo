@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/models/user_model.dart';
-import 'package:shamo/providers/auth_provider.dart';
-import 'package:shamo/theme.dart';
 
-import '../utils/config.dart';
+import '../models/models.dart';
+import '../providers/providers.dart';
+import '../theme.dart';
+import '../utils/utils.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -24,7 +24,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
 
     nameController.text = Config().users.name.toString();
     usernameController.text = Config().users.username.toString();
@@ -39,7 +38,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         email: emailController.text,
         name: nameController.text,
         username: usernameController.text,
-        token: user.token.toString(),
+        token: Config().token.toString(),
       )) {
         // Navigator.pushNamed(context, '/home');
         Navigator.pop(context);
@@ -168,7 +167,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage('${user.profilePhotoUrl!}&size=54'),
+                  image: NetworkImage(
+                    '${Config().users.profilePhotoUrl!}&size=54',
+                  ),
                 ),
               ),
             ),

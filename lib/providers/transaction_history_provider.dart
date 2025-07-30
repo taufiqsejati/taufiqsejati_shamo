@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../models/transaction_history_model.dart';
-import '../services/transaction_service.dart';
+import '../models/models.dart';
+import '../services/services.dart';
 
 class TransactionHistoryProvider with ChangeNotifier {
   List<TransactionHistoryModel> _transactionHistory = [];

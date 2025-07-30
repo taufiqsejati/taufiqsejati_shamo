@@ -1,5 +1,4 @@
-import 'package:shamo/models/category_model.dart';
-import 'package:shamo/models/gallery_model.dart';
+import './models.dart';
 
 class ProductModel {
   int? id;

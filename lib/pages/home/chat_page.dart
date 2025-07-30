@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/models/message_model.dart';
-import 'package:shamo/providers/auth_provider.dart';
-import 'package:shamo/providers/page_provider.dart';
-import 'package:shamo/services/message_service.dart';
-import 'package:shamo/widgets/chat_tile.dart';
 
+import '../../models/models.dart';
+import '../../providers/providers.dart';
+import '../../services/services.dart';
 import '../../theme.dart';
 import '../../utils/config.dart';
+import '../../widgets/widgets.dart';
 
 class ChatPage extends StatelessWidget {
   @override
@@ -104,8 +103,6 @@ class ChatPage extends StatelessWidget {
             );
           } else {
             return emptyChat();
-            // print("err : ${snapshot.data.toString()}");
-            // return Text(snapshot.error.toString(), style: primaryTextStyle);
           }
         },
       );

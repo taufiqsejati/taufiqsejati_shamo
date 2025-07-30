@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
-import 'package:shamo/models/product_model.dart';
-import 'package:shamo/utils/dio_helper.dart';
+import '../models/models.dart';
+import '../utils/utils.dart';
 
 class ProductService {
   String baseUrl = 'http://project-taufiqsejati.my.id/api';
@@ -17,18 +15,13 @@ class ProductService {
     );
     // var response = await http.get(url, headers: headers);
 
-    print('sukses get data : ${response.data}');
-
     if (response.statusCode == 200) {
       List data = response.data['data']['data'];
-      print('sukses get data 2 : ${data}');
       List<ProductModel> products = [];
 
       for (var item in data) {
-        print('sukses procut $item');
         products.add(ProductModel.fromJson(item));
       }
-      print('popular product');
       return products;
     } else {
       throw Exception('Gagal Get Products!');

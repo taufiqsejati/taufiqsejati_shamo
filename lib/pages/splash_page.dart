@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/providers/product_provider.dart';
-import 'package:shamo/theme.dart';
 
-import '../utils/config.dart';
+import '../providers/providers.dart';
+import '../theme.dart';
+import '../utils/utils.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -18,6 +17,10 @@ class _SplashPageState extends State<SplashPage> {
   void didChangeDependencies() {
     Future.delayed(const Duration(milliseconds: 1500), () async {
       await Provider.of<ProductProvider>(context, listen: false).getProducts();
+      await Provider.of<TransactionHistoryProvider>(
+        context,
+        listen: false,
+      ).getTransactionHistory(Config().token.toString());
       if (_isLoggedIn) {
         Navigator.of(
           context,

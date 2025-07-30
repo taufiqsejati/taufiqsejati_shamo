@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/providers/page_provider.dart';
-import 'package:shamo/providers/wishlist_provider.dart';
-import 'package:shamo/widgets/wishlist_card.dart';
 
+import '../../providers/providers.dart';
 import '../../theme.dart';
+import '../../widgets/widgets.dart';
 
 class WishlistPage extends StatelessWidget {
   @override
@@ -79,10 +78,9 @@ class WishlistPage extends StatelessWidget {
           color: backgroundColor3,
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            children:
-                wishlistProvider.wishlist
-                    .map((product) => WishlistCard(product))
-                    .toList(),
+            children: wishlistProvider.wishlist
+                .map((product) => WishlistCard(product))
+                .toList(),
           ),
         ),
       );
