@@ -12,6 +12,7 @@ class UserModel {
   String? createdAt;
   String? updatedAt;
   String? profilePhotoUrl;
+  String? address;
 
   UserModel({
     this.token,
@@ -27,6 +28,7 @@ class UserModel {
     this.createdAt,
     this.updatedAt,
     this.profilePhotoUrl,
+    this.address,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -43,6 +45,7 @@ class UserModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     profilePhotoUrl = json['profile_photo_url'];
+    address = json['address'];
   }
 
   Map<String, dynamic> toJson() {
@@ -61,6 +64,7 @@ class UserModel {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['profile_photo_url'] = this.profilePhotoUrl;
+    data['address'] = this.address;
     return data;
   }
 }

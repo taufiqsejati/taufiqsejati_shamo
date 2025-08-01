@@ -9,6 +9,7 @@ class TransactionService {
 
   Future<bool> checkout(
     String? token,
+    String? address,
     List<CartModel> carts,
     double? totalPrice,
   ) async {
@@ -18,7 +19,7 @@ class TransactionService {
       'Authorization': token.toString(),
     };
     var body = jsonEncode({
-      'address': 'Marsemoon',
+      'address': address,
       'items': carts
           .map((cart) => {'id': cart.product?.id, 'quantity': cart.quantity})
           .toList(),
@@ -68,7 +69,12 @@ class TransactionService {
 
       for (var item in data) {
         transactionHistory.add(TransactionHistoryModel.fromJson(item));
+        transactionHistory.sort(
+          (TransactionHistoryModel a, TransactionHistoryModel b) =>
+              b.createdAt!.compareTo(a.createdAt!),
+        );
       }
+      print(transactionHistory);
       return transactionHistory;
     } else {
       throw Exception('Gagal Get Products!');

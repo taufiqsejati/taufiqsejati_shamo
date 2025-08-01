@@ -12,8 +12,8 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController(
-    text: "jennie.kim2@blackpink.co",
-    // text: 'taufiqsejati01@gmail.com',
+    // text: "jennie.kim2@blackpink.co",
+    text: 'taufiqsejati01@gmail.com',
   );
 
   TextEditingController passwordController = TextEditingController(

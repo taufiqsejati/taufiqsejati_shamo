@@ -19,6 +19,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   TextEditingController passwordController = TextEditingController(text: '');
 
+  TextEditingController addressController = TextEditingController(text: '');
+
   bool isLoading = false;
 
   @override
@@ -35,6 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
         username: usernameController.text,
         email: emailController.text,
         password: passwordController.text,
+        address: addressController.text,
       )) {
         Navigator.of(
           context,
@@ -254,6 +257,52 @@ class _SignUpPageState extends State<SignUpPage> {
       );
     }
 
+    Widget addressInput() {
+      return Container(
+        margin: EdgeInsets.only(top: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Address',
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
+            ),
+            SizedBox(height: 12),
+            Container(
+              height: 50,
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: backgroundColor2,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Row(
+                  children: [
+                    // Image.asset('assets/icon_name.png', width: 17),
+                    Icon(Icons.location_city, color: primaryColor),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: TextFormField(
+                        style: primaryTextStyle,
+                        controller: addressController,
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'Your Address',
+                          hintStyle: subtitleTextStyle,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget signUpButton() {
       return Container(
         height: 50,
@@ -316,6 +365,7 @@ class _SignUpPageState extends State<SignUpPage> {
               usernameInput(),
               emailInput(),
               passwordInput(),
+              addressInput(),
               isLoading ? LoadingButton() : signUpButton(),
               Spacer(),
               footer(),

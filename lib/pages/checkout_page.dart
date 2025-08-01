@@ -29,15 +29,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
       if (await transactionProvider.checkout(
         Config().token.toString(),
+        Config().users.address.toString(),
         cartProvider.carts,
         cartProvider.totalPrice(),
       )) {
         cartProvider.carts = [];
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/checkout-success',
-          (route) => false,
-        );
+        Navigator.pushNamed(context, '/checkout-success');
       }
 
       setState(() {
@@ -141,7 +138,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           ),
                         ),
                         Text(
-                          'Marsemoon',
+                          Config().users.address ?? '-',
                           style: primaryTextStyle.copyWith(fontWeight: medium),
                         ),
                       ],

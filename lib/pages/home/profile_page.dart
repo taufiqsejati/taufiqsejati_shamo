@@ -123,7 +123,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: menuItem('Edit Profile'),
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  await Provider.of<TransactionHistoryProvider>(
+                    context,
+                    listen: false,
+                  ).getTransactionHistory(Config().token.toString());
                   Navigator.pushNamed(context, '/history-transaction');
                 },
                 child: menuItem('Your Orders'),

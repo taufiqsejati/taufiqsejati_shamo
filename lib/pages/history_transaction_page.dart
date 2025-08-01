@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
-import '../dimens.dart';
 import '../providers/providers.dart';
+import '../widgets/widgets.dart';
 import '../theme.dart';
-import '../utils/utils.dart';
 
 class HistoryTransactionPage extends StatefulWidget {
   const HistoryTransactionPage({super.key});
@@ -17,7 +15,6 @@ class HistoryTransactionPage extends StatefulWidget {
 class _HistoryTransactionPageState extends State<HistoryTransactionPage> {
   @override
   Widget build(BuildContext context) {
-    Jiffy.setLocale("ID");
     // AuthProvider authProvider = Provider.of<AuthProvider>(context);
     // UserModel user = authProvider.user;
     TransactionHistoryProvider transactionHistoryProvider =
@@ -44,88 +41,26 @@ class _HistoryTransactionPageState extends State<HistoryTransactionPage> {
       backgroundColor: backgroundColor3,
       appBar: header(),
       body: SafeArea(
-        child: ListView(
-          children: [
-            Column(
-              children: transactionHistoryProvider.transactionHistory
-                  .map(
-                    (e) => Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(
-                        vertical: Spacing.base,
-                        horizontal: Spacing.base,
-                      ),
-                      padding: const EdgeInsets.all(Spacing.base),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Id : ${e.id.toString()}",
-                            style: primaryTextStyle,
-                          ),
-                          Text(
-                            "Users Id : ${e.usersId.toString()}",
-                            style: primaryTextStyle,
-                          ),
-                          Text(
-                            "Total Price : ${e.totalPrice.toString()}",
-                            style: primaryTextStyle,
-                          ),
-                          Text(
-                            "Shipping Price : ${e.shippingPrice.toString()}",
-                            style: primaryTextStyle,
-                          ),
-                          Text(
-                            "Status : ${e.status.toString()}",
-                            style: primaryTextStyle,
-                          ),
-                          Text(
-                            "Payment : ${e.payment.toString()}",
-                            style: primaryTextStyle,
-                          ),
-                          Text(
-                            "Created : ${Jiffy.parse(e.createdAt.toString()).format(pattern: 'EEEE, do MMMM yyyy, h:mm a')}",
-                            style: primaryTextStyle,
-                          ),
-                          Text("Item", style: primaryTextStyle),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: e.items!
-                                .map(
-                                  (e) => Container(
-                                    margin: const EdgeInsets.only(
-                                      bottom: Spacing.base,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Name Product : ${e.product?.name.toString()}",
-                                          style: secondaryTextStyle,
-                                        ),
-                                        Text(
-                                          "Quantity : ${e.quantity.toString()}",
-                                          style: secondaryTextStyle,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
-        ),
+        child: transactionHistoryProvider.transactionHistory.isNotEmpty
+            ? ListView(
+                children: [
+                  Column(
+                    children: transactionHistoryProvider.transactionHistory
+                        .map((e) => HistoryTransactionCard(item: e))
+                        .toList(),
+                  ),
+                ],
+              )
+            : Container(
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    "Data Tidak Tersedia",
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
       ),
 
       resizeToAvoidBottomInset: false,

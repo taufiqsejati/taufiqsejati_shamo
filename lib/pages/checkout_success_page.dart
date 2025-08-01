@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/providers.dart';
 import '../theme.dart';
+import '../utils/utils.dart';
 
 class CheckoutSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
     PreferredSizeWidget header() {
       return AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: primaryTextColor),
           onPressed: () {
-            Navigator.pop(context);
+            pageProvider.currentIndex = 0;
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              '/home',
+              (route) => false,
+            );
           },
         ),
         backgroundColor: backgroundColor1,
@@ -45,6 +54,7 @@ class CheckoutSuccessPage extends StatelessWidget {
               margin: EdgeInsets.only(top: defaultMargin),
               child: TextButton(
                 onPressed: () {
+                  pageProvider.currentIndex = 0;
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     '/home',
@@ -71,7 +81,13 @@ class CheckoutSuccessPage extends StatelessWidget {
               height: 44,
               margin: EdgeInsets.only(top: 12),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await Provider.of<TransactionHistoryProvider>(
+                    context,
+                    listen: false,
+                  ).getTransactionHistory(Config().token.toString());
+                  Navigator.pushNamed(context, '/history-transaction');
+                },
                 style: TextButton.styleFrom(
                   backgroundColor: Color(0xff39374B),
                   shape: RoundedRectangleBorder(

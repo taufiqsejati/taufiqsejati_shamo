@@ -29,6 +29,8 @@ class MUsers {
   String? updatedAt;
   @HiveField(11)
   String? profilePhotoUrl;
+  @HiveField(12)
+  String? address;
   MUsers({
     this.id,
     this.name,
@@ -42,6 +44,7 @@ class MUsers {
     this.createdAt,
     this.updatedAt,
     this.profilePhotoUrl,
+    this.address,
   });
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -57,6 +60,7 @@ class MUsers {
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     data['profilePhotoUrl'] = this.profilePhotoUrl;
+    data['address'] = this.address;
     return data;
   }
 }

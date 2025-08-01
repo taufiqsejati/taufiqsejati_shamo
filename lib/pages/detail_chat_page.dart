@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../dimens.dart';
 import '../models/models.dart';
 import '../services/services.dart';
 import '../theme.dart';
@@ -16,6 +17,7 @@ class DetailChatPage extends StatefulWidget {
 
 class _DetailChatPageState extends State<DetailChatPage> {
   TextEditingController messageController = TextEditingController(text: '');
+  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
         product: widget.product,
         message: messageController.text,
       );
-
+      FocusScope.of(context).unfocus(); // <-- Hide virtual keyboard
       setState(() {
         widget.product = UninitializedProductModel();
         messageController.text = '';
@@ -156,20 +158,30 @@ class _DetailChatPageState extends State<DetailChatPage> {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    height: 45,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: backgroundColor4,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: TextFormField(
-                        controller: messageController,
-                        style: primaryTextStyle,
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Type Message...',
-                          hintStyle: subtitleTextStyle,
+                  child: GestureDetector(
+                    onTap: () {
+                      // Move the scroll position to the bottom
+                      scrollController.animateTo(
+                        0,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    child: Container(
+                      height: 45,
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: backgroundColor4,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: TextFormField(
+                          controller: messageController,
+                          style: primaryTextStyle,
+                          decoration: InputDecoration.collapsed(
+                            hintText: 'Type Message...',
+                            hintStyle: subtitleTextStyle,
+                          ),
                         ),
                       ),
                     ),
@@ -194,17 +206,28 @@ class _DetailChatPageState extends State<DetailChatPage> {
         ),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView(
-              padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-              children: snapshot.data!
-                  .map(
-                    (MessageModel message) => ChatBubble(
-                      isSender: message.isFromUser!,
-                      text: message.message!,
-                      product: message.product!,
-                    ),
-                  )
-                  .toList(),
+            return GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus(); // <-- Hide virtual keyboard
+              },
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: ListView(
+                  reverse: true,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+                  controller: scrollController,
+                  children: snapshot.data!
+                      .map(
+                        (MessageModel message) => ChatBubble(
+                          isSender: message.isFromUser!,
+                          text: message.message!,
+                          product: message.product!,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             );
           } else {
             return Center(child: CircularProgressIndicator());
@@ -214,10 +237,16 @@ class _DetailChatPageState extends State<DetailChatPage> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: true, // assign true
       backgroundColor: backgroundColor3,
       appBar: header(),
-      bottomNavigationBar: chatInput(),
-      body: content(),
+      // bottomNavigationBar: chatInput(),
+      body: Column(
+        children: [
+          Expanded(child: content()),
+          chatInput(),
+        ],
+      ),
     );
   }
 }

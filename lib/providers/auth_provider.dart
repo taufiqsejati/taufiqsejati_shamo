@@ -19,6 +19,7 @@ class AuthProvider with ChangeNotifier {
     String? username,
     String? email,
     String? password,
+    String? address,
   }) async {
     try {
       UserModel user = await AuthService().register(
@@ -26,6 +27,7 @@ class AuthProvider with ChangeNotifier {
         username: username,
         email: email,
         password: password,
+        address: address,
       );
 
       _user = user;
@@ -65,6 +67,7 @@ class AuthProvider with ChangeNotifier {
           profilePhotoPath: user.profilePhotoPath,
           createdAt: user.createdAt,
           updatedAt: user.updatedAt,
+          address: user.address,
         ),
       );
       await Config.set('isLoggedIn', true);
@@ -108,6 +111,7 @@ class AuthProvider with ChangeNotifier {
           profilePhotoPath: user.profilePhotoPath,
           createdAt: user.createdAt,
           updatedAt: user.updatedAt,
+          address: user.address,
         ),
       );
       return true;

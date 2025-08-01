@@ -11,6 +11,7 @@ class AuthService {
     String? username,
     String? email,
     String? password,
+    String? address,
   }) async {
     // var url = Uri.parse('$baseUrl/register');
     // var headers = {'Content-Type': 'application/json'};
@@ -19,6 +20,7 @@ class AuthService {
       'username': username,
       'email': email,
       'password': password,
+      'address': address,
     });
 
     final response = await DioHelper.dio!.post(

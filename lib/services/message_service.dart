@@ -21,7 +21,7 @@ class MessageService {
             }).toList();
             result.sort(
               (MessageModel a, MessageModel b) =>
-                  a.createdAt!.compareTo(b.createdAt!),
+                  b.createdAt!.compareTo(a.createdAt!),                                                                                                                               
             );
 
             return result;
