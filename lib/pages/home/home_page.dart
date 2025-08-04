@@ -94,16 +94,18 @@ class _HomePageState extends State<HomePage>
                 ],
               ),
             ),
-            // Container(
-            //   width: 54,
-            //   height: 54,
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     image: DecorationImage(
-            //       image: NetworkImage('${user.profilePhotoUrl!}&size=54'),
-            //     ),
-            //   ),
-            // ),
+            Container(
+              width: 54,
+              height: 54,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: NetworkImage(
+                    '${Config().users.profilePhotoUrl!}&size=54',
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       );
