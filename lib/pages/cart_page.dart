@@ -142,8 +142,10 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor3,
       appBar: header(),
-      body: cartProvider.carts.length == 0 ? emptyCart() : content(),
-      bottomNavigationBar: cartProvider.carts.length == 0
+      body: SafeArea(
+        child: cartProvider.carts.isEmpty ? emptyCart() : content(),
+      ),
+      bottomNavigationBar: cartProvider.carts.isEmpty
           ? SizedBox()
           : customBottomNav(),
     );

@@ -69,13 +69,19 @@ class AuthService {
     String? username,
     String? email,
     String? token,
+    String? address,
   }) async {
     // var url = Uri.parse('$baseUrl/register');
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token.toString(),
     };
-    var body = jsonEncode({'name': name, 'username': username, 'email': email});
+    var body = jsonEncode({
+      'name': name,
+      'username': username,
+      'email': email,
+      'address': address,
+    });
 
     final response = await DioHelper.dio!.post(
       '/user',

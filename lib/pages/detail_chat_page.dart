@@ -241,11 +241,13 @@ class _DetailChatPageState extends State<DetailChatPage> {
       backgroundColor: backgroundColor3,
       appBar: header(),
       // bottomNavigationBar: chatInput(),
-      body: Column(
-        children: [
-          Expanded(child: content()),
-          chatInput(),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(child: content()),
+            chatInput(),
+          ],
+        ),
       ),
     );
   }

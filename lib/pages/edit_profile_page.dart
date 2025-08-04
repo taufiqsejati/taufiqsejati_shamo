@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shamo/dimens.dart';
 
 import '../providers/providers.dart';
 import '../theme.dart';
@@ -19,6 +20,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController nameController = TextEditingController(text: "");
   TextEditingController usernameController = TextEditingController(text: "");
   TextEditingController emailController = TextEditingController(text: "");
+  TextEditingController addressController = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     nameController.text = Config().users.name.toString();
     usernameController.text = Config().users.username.toString();
     emailController.text = Config().users.email.toString();
+    addressController.text = Config().users.address.toString();
 
     handleEdit() async {
       setState(() {
@@ -37,6 +40,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         email: emailController.text,
         name: nameController.text,
         username: usernameController.text,
+        address: addressController.text,
         token: Config().token.toString(),
       )) {
         // Navigator.pushNamed(context, '/home');
@@ -151,30 +155,60 @@ class _EditProfilePageState extends State<EditProfilePage> {
       );
     }
 
+    Widget addressInput() {
+      return Container(
+        margin: EdgeInsets.only(top: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Address', style: secondaryTextStyle.copyWith(fontSize: 13)),
+            TextFormField(
+              style: primaryTextStyle,
+              // initialValue: "${user.username}",
+              controller: addressController,
+              decoration: InputDecoration(
+                // hintText: '@${user.username}',
+                hintStyle: primaryTextStyle,
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: subtitleColor),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget content() {
       return Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
-            Container(
-              width: 100,
-              height: 100,
-              margin: EdgeInsets.only(top: defaultMargin),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(
-                    '${Config().users.profilePhotoUrl!}&size=54',
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  margin: EdgeInsets.only(top: defaultMargin),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(
+                        '${Config().users.profilePhotoUrl!}&size=54',
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                nameInput(),
+                usernameInput(),
+                emailInput(),
+                addressInput(),
+                SizedBox(height: Spacing.xl_2),
+              ],
             ),
-            nameInput(),
-            usernameInput(),
-            emailInput(),
           ],
         ),
       );
@@ -183,8 +217,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       backgroundColor: backgroundColor3,
       appBar: header(),
-      body: content(),
-      resizeToAvoidBottomInset: false,
+      body: SafeArea(child: content()),
+      // resizeToAvoidBottomInset: false,
     );
   }
 }

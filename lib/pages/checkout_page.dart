@@ -35,6 +35,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
       )) {
         cartProvider.carts = [];
         Navigator.pushNamed(context, '/checkout-success');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: Text(
+              'Gagal Melakukan Checkout!',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
       }
 
       setState(() {
@@ -266,7 +276,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     return Scaffold(
       backgroundColor: backgroundColor3,
       appBar: header(),
-      body: content(),
+      body: SafeArea(child: content()),
     );
   }
 }

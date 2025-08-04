@@ -83,6 +83,7 @@ class AuthProvider with ChangeNotifier {
     String? username,
     String? email,
     String? token,
+    String? address,
   }) async {
     try {
       UserModel user = await AuthService().updateProfile(
@@ -90,6 +91,7 @@ class AuthProvider with ChangeNotifier {
         username: username,
         email: email,
         token: token,
+        address: address,
       );
 
       _user = user;

@@ -74,6 +74,7 @@ class Items {
   String? createdAt;
   String? updatedAt;
   ProductModel? product;
+  List<GalleryModel>? galleries;
 
   Items({
     this.id,
@@ -84,6 +85,7 @@ class Items {
     this.createdAt,
     this.updatedAt,
     this.product,
+    this.galleries,
   });
 
   Items.fromJson(Map<String, dynamic> json) {
@@ -97,6 +99,12 @@ class Items {
     product = json['product'] != null
         ? new ProductModel.fromJson(json['product'])
         : null;
+    if (json['galleries'] != null) {
+      galleries = <GalleryModel>[];
+      json['galleries'].forEach((v) {
+        galleries!.add(new GalleryModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -110,6 +118,9 @@ class Items {
     data['updated_at'] = this.updatedAt;
     if (this.product != null) {
       data['product'] = this.product!.toJson();
+    }
+    if (this.galleries != null) {
+      data['galleries'] = this.galleries!.map((v) => v.toJson()).toList();
     }
     return data;
   }

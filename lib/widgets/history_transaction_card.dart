@@ -27,12 +27,12 @@ class HistoryTransactionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Created Order :\n${Jiffy.parse(item.createdAt.toString()).format(pattern: 'EEEE, do MMMM yyyy, h:mm a')}",
+            "Created Order \n${Jiffy.parse(item.createdAt.toString()).format(pattern: 'EEEE, do MMMM yyyy, h:mm a')}",
             style: primaryTextStyle,
           ),
           Divider(color: Colors.white, thickness: 0.8),
           const SizedBox(height: Spacing.dp),
-          Text("Item Order :", style: primaryTextStyle),
+          Text("Item Order", style: primaryTextStyle),
           const SizedBox(height: 5),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,21 +40,35 @@ class HistoryTransactionCard extends StatelessWidget {
                 .map(
                   (item) => Container(
                     margin: const EdgeInsets.only(bottom: Spacing.base),
-                    padding: EdgeInsets.symmetric(horizontal: Spacing.base),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    padding: EdgeInsets.symmetric(horizontal: Spacing.dp),
+                    child: Row(
                       children: [
-                        Text(
-                          "Name Product : ${item.product?.name.toString()}",
-                          style: secondaryTextStyle,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network(
+                            item.galleries![0].url!,
+                            width: 60,
+                          ),
                         ),
-                        Text(
-                          "Price : \$${item.product?.price.toString()}",
-                          style: secondaryTextStyle,
-                        ),
-                        Text(
-                          "Quantity : ${item.quantity.toString()}",
-                          style: secondaryTextStyle,
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Name Product : ${item.product?.name.toString()}",
+                                style: secondaryTextStyle,
+                              ),
+                              Text(
+                                "Price : \$${item.product?.price.toString()}",
+                                style: secondaryTextStyle,
+                              ),
+                              Text(
+                                "Quantity : ${item.quantity.toString()}",
+                                style: secondaryTextStyle,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

@@ -406,7 +406,7 @@ class _ProductPageState extends State<ProductPage> {
 
     return Scaffold(
       backgroundColor: backgroundColor6,
-      body: ListView(children: [header(), content()]),
+      body: SafeArea(child: ListView(children: [header(), content()])),
     );
   }
 }

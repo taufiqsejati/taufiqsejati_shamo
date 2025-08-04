@@ -112,7 +112,7 @@ class CheckoutSuccessPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor3,
       appBar: header(),
-      body: content(),
+      body: SafeArea(child: content()),
     );
   }
 }
