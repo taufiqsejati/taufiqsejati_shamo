@@ -43,20 +43,22 @@ class HistoryTransactionCard extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: Spacing.dp),
                     child: Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            item.galleries![0].url!,
-                            width: 60,
-                          ),
-                        ),
+                        item.galleries!.isNotEmpty
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  item.galleries![0].url!,
+                                  width: 60,
+                                ),
+                              )
+                            : SizedBox(),
                         SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Name Product : ${item.product?.name.toString()}",
+                                "Name Product : ${item.product?.name.toString()}${item.galleries!.isNotEmpty ? '' : '.'}",
                                 style: secondaryTextStyle,
                               ),
                               Text(

@@ -8,7 +8,7 @@ class Config {
   bool get isLoggedIn => configContainer.get('isLoggedIn', defaultValue: false);
   MUsers get users => configContainer.get('users', defaultValue: defaultUsers);
 
-  String? get baseUrl => "http://192.168.77.19:8000";
+  String? get baseUrl => "http://192.168.1.106:8000";
 
   String? get email => configContainer.get('email');
   String? get fullName => configContainer.get('fullName');

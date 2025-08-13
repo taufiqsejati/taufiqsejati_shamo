@@ -1,6 +1,7 @@
 export 'auth_provider.dart';
 export 'cart_provider.dart';
 export 'custom_provider.dart';
+export 'new_arrival_provider.dart';
 export 'page_provider.dart';
 export 'product_provider.dart';
 export 'transaction_history_provider.dart';

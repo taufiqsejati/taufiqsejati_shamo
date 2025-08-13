@@ -18,14 +18,7 @@ class _HomePageState extends State<HomePage>
   bool isLoading = false;
   List<ProductModel> data = [];
   late TabController _tabController;
-  final chips = [
-    'All Shoes',
-    'Sport',
-    'Hiking',
-    'Basketball',
-    'Training',
-    'Running',
-  ];
+  final chips = ['All Shoes', 'Hiking', 'Basketball', 'Training', 'Running'];
 
   @override
   void setState(fn) {
@@ -36,7 +29,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    _tabController = TabController(length: 6, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 5, vsync: this, initialIndex: 0);
     _tabController.addListener(_handleTabSelection);
     super.initState();
   }
@@ -66,6 +59,9 @@ class _HomePageState extends State<HomePage>
     // AuthProvider authProvider = Provider.of<AuthProvider>(context);
     // UserModel user = authProvider.user;
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
+    NewArrivalProvider newArrivalProvider = Provider.of<NewArrivalProvider>(
+      context,
+    );
 
     Widget header() {
       return Container(
@@ -227,9 +223,6 @@ class _HomePageState extends State<HomePage>
     Widget popularProducts() {
       var all = productProvider.products;
       // AllMovies.where((i) => i.isAnimated).toList()
-      List<ProductModel> sport = productProvider.products
-          .where((e) => e.categoriesId == 1)
-          .toList();
       List<ProductModel> hiking = productProvider.products
           .where((e) => e.categoriesId == 2)
           .toList();
@@ -254,34 +247,6 @@ class _HomePageState extends State<HomePage>
                         SizedBox(width: defaultMargin),
                         Row(
                           children: all
-                              .map((product) => ProductCard(product))
-                              .toList(),
-                        ),
-                      ],
-                    ),
-                  )
-                : Container(
-                    height: 278,
-                    width: double.infinity,
-                    child: Center(
-                      child: Text(
-                        "Data Tidak Tersedia",
-                        style: TextStyle(color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 14),
-            child: sport.isNotEmpty
-                ? SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        SizedBox(width: defaultMargin),
-                        Row(
-                          children: sport
                               .map((product) => ProductCard(product))
                               .toList(),
                         ),
@@ -450,9 +415,9 @@ class _HomePageState extends State<HomePage>
     Widget newArrivals() {
       return Container(
         margin: EdgeInsets.only(top: 14),
-        child: productProvider.products.isNotEmpty
+        child: newArrivalProvider.products.isNotEmpty
             ? Column(
-                children: productProvider.products
+                children: newArrivalProvider.products
                     .map((product) => ProductTile(product))
                     .toList(),
               )

@@ -17,6 +17,10 @@ class _SplashPageState extends State<SplashPage> {
   void didChangeDependencies() {
     Future.delayed(const Duration(milliseconds: 1500), () async {
       await Provider.of<ProductProvider>(context, listen: false).getProducts();
+      await Provider.of<NewArrivalProvider>(
+        context,
+        listen: false,
+      ).getNewArrival();
 
       if (_isLoggedIn) {
         Navigator.of(
